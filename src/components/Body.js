@@ -2,10 +2,15 @@ import SearchContainer from "./SearchContainer";
 import ResContainer from "./ResContainer";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import useReslistdata from "../utils/useReslistdata";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   let [origResList, setOrigResList] = useState([]);
   let [filterRes, setFilterRes] = useState([]);
+
+  // const [filterRes, origResList] = useReslistdata();
+  const isOnline = useOnlineStatus();
 
   useEffect(() => {
     fetchData();
@@ -24,7 +29,7 @@ const Body = () => {
   return (
     <div>
       <button
-        className="filter-btn"
+        className="m-4 bg-slate-200 rounded-md px-2"
         onClick={() => {
           console.log("tappes");
           filterRes = origResList.filter((res) => {
@@ -48,7 +53,7 @@ const Body = () => {
           }
         }}
       />
-      {filterRes.length < 1 ? <Shimmer /> : <ResContainer list={filterRes} />}
+      {filterRes.length === 0 ? <Shimmer /> : <ResContainer list={filterRes} />}
     </div>
   );
 };

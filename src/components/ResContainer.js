@@ -5,7 +5,7 @@ const ResContainer = (props) => {
   const { list } = props;
   console.log(list);
   return (
-    <div className="res-container">
+    <div className="flex flex-wrap">
       {list.map((ele) => {
         return (
           <Link
